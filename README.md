@@ -22,6 +22,48 @@
 
 ---
 
+## 📌 About This Repository
+
+> **This is the INATrace meta repository** — the central hub for project-wide documentation, governance, technical specifications, and cross-repo coordination.
+
+**Source code** lives in the four dedicated component repositories (listed below). **This repo** is the canonical home for everything that spans the full project:
+
+| What lives here | Purpose |
+|----------------|---------|
+| 📋 **Project charter & governance** | Decision-making processes, roles, contribution policies |
+| 📐 **Technical specs & proposals** | Architecture decisions, integration designs, enhancement proposals |
+| 🔗 **Integration documentation** | Cross-system specs (e.g., Asset Registry, EUDR/Whisp, AgStack ecosystem) |
+| 🗺️ **Roadmap & planning** | Project-wide priorities, phased roadmaps, task breakdowns |
+| 📖 **Landing page & overview** | This README — the single entry point for understanding INATrace |
+| 🤝 **Contributing guide** | How to get involved across all INATrace repos |
+
+### Repository Structure
+
+```
+agstack/inatrace/                    ← You are here
+│
+├── README.md                        ← Project landing page (this file)
+├── ASSET_REGISTRY_INTEGRATION.md    ← AgStack Asset Registry integration spec & roadmap
+├── CONTRIBUTING.md                  ← (planned) Cross-repo contribution guide
+├── CHARTER.md                       ← (planned) Project charter
+├── GOVERNANCE.md                    ← (planned) Decision-making & roles
+│
+├── specs/                           ← (planned) Technical specs & enhancement proposals
+│   ├── 001-asset-registry-v2.md
+│   ├── 002-eudr-compliance.md
+│   └── ...
+│
+├── decisions/                       ← (planned) Architecture Decision Records (ADRs)
+│   ├── 001-meta-repo-structure.md
+│   └── ...
+│
+└── .github/                         ← Issue/PR templates for cross-repo concerns
+```
+
+> **Design intent:** Any document that applies to INATrace as a whole — not just one component — belongs here. Code changes go in the component repos. Project-level decisions, specs, governance, and roadmaps go here.
+
+---
+
 ## 🌍 What is INATrace?
 
 **INATrace** is an end-to-end digital traceability platform for agricultural commodities (coffee, cocoa, and beyond). It provides:
@@ -54,14 +96,16 @@
 ├──────────────┴──────────────┴─────────────────┴────────────────────┤
 │                                                                     │
 │  🗄️ MySQL Database    📧 Email (SMTP)    🗺️ MapBox    💱 Exchange API  │
+│                                                                     │
+│  🌐 AgStack Asset Registry (GeoID)    🛰️ Whisp/EUDR (Compliance)    │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📦 Repositories
+## 📦 Component Repositories
 
-This is the **meta repository** for the INATrace project. The source code lives in four dedicated repositories:
+Source code lives in four dedicated repositories. Each has its own README with setup instructions, development guide, and component-specific docs.
 
 ### ⚙️ [inatrace-backend](https://github.com/agstack/inatrace-backend) — Java API Server
 
@@ -170,6 +214,20 @@ The blockchain layer — a Hyperledger Fabric network with smart contracts (chai
 
 ---
 
+## 📐 Specifications & Enhancement Docs
+
+Cross-repo technical specifications, integration designs, and enhancement proposals live in this meta repository. These documents describe work that spans multiple INATrace components or connects INATrace to external systems.
+
+| Document | Status | Summary |
+|----------|--------|---------|
+| **[Asset Registry Integration](ASSET_REGISTRY_INTEGRATION.md)** | 📋 Draft | Full spec for INATrace ↔ AgStack Asset Registry. Includes current state analysis, gap analysis, proposed architecture (async queue, ListIDs, EUDR pipeline), 5-phase roadmap, and task breakdown. |
+| **EUDR Compliance Pipeline** | 🔜 Planned | Automated deforestation risk assessment via Whisp API, feeding compliance scores back into INATrace for batch reporting. |
+| **Asset Registry v2.0 Migration** | 🔜 Planned | Hub+Node federation, WKT masking, ListIDs, shared identity — adapting INATrace for the next-gen registry. |
+
+> **💡 Want to propose an enhancement?** Open an issue in this repo with the `enhancement` label, or submit a spec document as a PR.
+
+---
+
 ## 🔗 AgStack Asset Registry Integration
 
 > **⚠️ Partial Integration — Spec & Roadmap Available**
@@ -200,15 +258,7 @@ INATrace has an **existing but limited integration** with the [AgStack Asset Reg
 | 🟡 No automated EUDR compliance pipeline (Whisp is view-only) | Medium |
 | 🟡 No preparation for Asset Registry v2.0 (federated Hub+Node, ListIDs) | Medium |
 
-### 📋 Full Integration Spec & Roadmap
-
-**👉 [ASSET_REGISTRY_INTEGRATION.md](ASSET_REGISTRY_INTEGRATION.md)** — Complete technical specification including:
-- Detailed analysis of current code (backend, frontend, mobile)
-- Gap analysis with severity ratings
-- Asset Registry v2.0 implications
-- Proposed architecture with async queue, ListIDs, EUDR pipeline
-- 5-phase implementation roadmap with task breakdowns
-- Open questions for community discussion
+**👉 Full technical specification:** [ASSET_REGISTRY_INTEGRATION.md](ASSET_REGISTRY_INTEGRATION.md)
 
 ---
 
@@ -366,6 +416,28 @@ INATrace is part of the broader **AgStack Foundation** ecosystem of open digital
 
 ---
 
+## 🏛️ Governance & Charter
+
+> *Governance documents are being established for the INATrace project.*
+
+This meta repository is the canonical location for:
+
+- **Project Charter** — Mission, scope, and guiding principles
+- **Governance Model** — Decision-making process, maintainer roles, voting procedures
+- **Code of Conduct** — Community standards and enforcement
+- **Release Process** — How releases are coordinated across the four component repos
+
+These documents will be added as the governance framework is formalized. For now, INATrace operates under the broader [AgStack Foundation governance](https://github.com/agstack/governance).
+
+| Document | Status |
+|----------|--------|
+| `CHARTER.md` | 🔜 Planned |
+| `GOVERNANCE.md` | 🔜 Planned |
+| `CODE_OF_CONDUCT.md` | 🔜 Planned |
+| `RELEASE_PROCESS.md` | 🔜 Planned |
+
+---
+
 ## 📜 License
 
 All INATrace repositories are licensed under the **Mozilla Public License 2.0** (MPL-2.0).
@@ -374,9 +446,21 @@ All INATrace repositories are licensed under the **Mozilla Public License 2.0** 
 
 ## 🤝 Contributing
 
-We welcome contributions! To get started:
+We welcome contributions of all kinds — code, documentation, specs, and ideas!
 
-1. Browse [open issues](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Aagstack+inatrace) across INATrace repos
+### Where to contribute
+
+| Type of contribution | Where |
+|---------------------|-------|
+| **Bug fix or feature** in backend, frontend, mobile, or blockchain | The relevant [component repository](#-component-repositories) |
+| **Cross-repo enhancement proposal** or technical spec | This meta repo — open an issue or submit a spec PR |
+| **Governance, charter, or process** proposal | This meta repo |
+| **Integration design** (Asset Registry, EUDR, etc.) | This meta repo — see [specs section](#-specifications--enhancement-docs) |
+| **General question or discussion** | This meta repo — open a discussion or issue |
+
+### How to contribute
+
+1. Browse [open issues across INATrace repos](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Aagstack+inatrace)
 2. Fork the relevant repository
 3. Create a feature branch and submit a pull request
 4. See individual repo READMEs for development setup details
@@ -390,4 +474,3 @@ We welcome contributions! To get started:
 Part of [The AgStack Foundation](https://github.com/agstack) · A [Linux Foundation](https://www.linuxfoundation.org/) Project
 
 </div>
-
