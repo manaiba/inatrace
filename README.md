@@ -170,6 +170,48 @@ The blockchain layer — a Hyperledger Fabric network with smart contracts (chai
 
 ---
 
+## 🔗 AgStack Asset Registry Integration
+
+> **⚠️ Partial Integration — Spec & Roadmap Available**
+
+INATrace has an **existing but limited integration** with the [AgStack Asset Registry](https://github.com/agstack/asset-registry). When farmer plots are created with polygon coordinates, INATrace calls the Asset Registry's `/register-field-boundary` API to obtain a **GeoID** — a deterministic 64-character identifier for each geospatial boundary.
+
+### Current State
+
+| Feature | Status | Details |
+|---------|--------|---------|
+| Plot → GeoID registration | ✅ Implemented | `AgStackClientService.java` calls Asset Registry on plot create/update |
+| GeoID stored in database | ✅ Implemented | `Plot.geoId` column persists the identifier |
+| GeoID displayed in UI | ✅ Implemented | Web (Angular) + Mobile (React Native) show GeoID with copy button |
+| "Open in Whisp" (EUDR analysis) | ✅ Implemented | Opens [whisp.earthmap.org](https://whisp.earthmap.org) with GeoID |
+| Manual GeoID refresh | ✅ Implemented | `POST /userCustomers/{id}/plots/{plotId}/updateGeoID` |
+| GeoID in Excel export | ✅ Implemented | Included in farmer data exports |
+
+### Known Gaps
+
+| Gap | Severity |
+|-----|----------|
+| 🔴 **Silent failure** — registration errors return null with no user notification | Critical |
+| 🔴 **No batch registration** — Excel farmer import skips GeoID generation | Critical |
+| 🔴 **Integration disabled by default** — config values are empty in template | Critical |
+| 🟡 No reverse lookup (GeoID → boundary from registry) | Medium |
+| 🟡 No GeoID history/versioning when boundaries change | Medium |
+| 🟡 No overlap intelligence surfaced to users | Medium |
+| 🟡 No automated EUDR compliance pipeline (Whisp is view-only) | Medium |
+| 🟡 No preparation for Asset Registry v2.0 (federated Hub+Node, ListIDs) | Medium |
+
+### 📋 Full Integration Spec & Roadmap
+
+**👉 [ASSET_REGISTRY_INTEGRATION.md](ASSET_REGISTRY_INTEGRATION.md)** — Complete technical specification including:
+- Detailed analysis of current code (backend, frontend, mobile)
+- Gap analysis with severity ratings
+- Asset Registry v2.0 implications
+- Proposed architecture with async queue, ListIDs, EUDR pipeline
+- 5-phase implementation roadmap with task breakdowns
+- Open questions for community discussion
+
+---
+
 ## 📊 Project Stats
 
 | Metric | Backend | Frontend | Mobile | Blockchain | **Total** |
